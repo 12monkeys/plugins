@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Clear icon inside input field</title>
+</head>
+<body>
+
+<h1>Clear icon inside input field</h1>
+
+<input class="clearable" type="text" name="" value="" placeholder="Enter a Search term 1" />
+
+<input class="clearable" type="text" name="" value="" placeholder="Enter a Search term 2" />
+
+<style>
+body { text-align:center; }
+.clearable { /*background:url(http://i.imgur.com/z7ZSYjt.png) no-repeat right -10px center;*/ background:url(icon-clear.png) no-repeat right -10px center; border:1px solid #999; padding:3px 18px 3px 4px; border-radius:3px; transition: background 0.4s;
+}
+.clearable.x { background-position: right 5px center; }
+.clearable.onX { cursor:pointer; }
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var clearable = document.querySelectorAll('.clearable'),
+      clearableLen = clearable.length;
+  clearable.forEach(function(input){
+	input.addEventListener('input', function() {
+	  this.value.length > 0 ? this.className = 'clearable x' : this.className = 'clearable';
+	  
+	});
+	input.addEventListener('mousemove', function(e) {
+	  if (this.value.length > 0) {	
+	    this.getBoundingClientRect().width - 18 < e.clientX  -this.getBoundingClientRect().left ? this.className = 'clearable x onX' : this.className = 'clearable x';
+	  }
+	});
+	input.addEventListener('click', function(e){
+		if (this.className.indexOf('onX')){
+			this.value = '';
+			this.className = 'clearable';
+		}
+	});
+  });   
+
+});
+</script>	
+</body>
+</html>
